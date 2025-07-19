@@ -1,8 +1,15 @@
-"postinstall": "npm install --legacy-peer-deps"
-
-"scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "postinstall": "npm install --legacy-peer-deps"
+{
+  "name": "snaptik",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "npm install --legacy-peer-deps"
+  },
+  "dependencies": {
+    "next": "13.4.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
 }
