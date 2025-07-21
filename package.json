@@ -1,6 +1,7 @@
 {
-  "name": "snaptik-downloader",
+  "name": "calculator-tools",
   "version": "1.0.0",
+  "description": "Free online calculator tools website with basic calculator, percentage calculator, BMI calculator, unit converter, and more",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,24 @@
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
-  }
+    "react-dom": "latest",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^10.16.4",
+    "react-icons": "^4.12.0"
+  },
+  "keywords": [
+    "calculator",
+    "online calculator", 
+    "math calculator",
+    "percentage calculator",
+    "BMI calculator",
+    "unit converter",
+    "loan calculator",
+    "temperature converter",
+    "free calculator tools"
+  ],
+  "author": "Calculator Tools",
+  "license": "MIT"
 }

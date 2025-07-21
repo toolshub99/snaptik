@@ -17,12 +17,16 @@ import {
   Text,
   useTheme,
   VStack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
 import { Open_Sans } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { MdDarkMode, MdLanguage, MdLightMode } from 'react-icons/md';
+import { MdDarkMode, MdLanguage, MdLightMode, MdExpandMore } from 'react-icons/md';
 
 type Props = {};
 
@@ -30,6 +34,17 @@ const openSans = Open_Sans({
   subsets: ['latin'],
   weight: '400',
 });
+
+const calculatorMenuItems = [
+  { title: 'Basic Calculator', href: '/calculators/basic' },
+  { title: 'Percentage Calculator', href: '/calculators/percentage' },
+  { title: 'BMI Calculator', href: '/calculators/bmi' },
+  { title: 'Unit Converter', href: '/calculators/unit-converter' },
+  { title: 'Temperature Converter', href: '/calculators/temperature' },
+  { title: 'Loan Calculator', href: '/calculators/loan' },
+  { title: 'Time Calculator', href: '/calculators/time' },
+  { title: 'Fuel Calculator', href: '/calculators/fuel' },
+];
 
 const NavBar = (props: Props) => {
   const theme = useTheme();
@@ -55,7 +70,7 @@ const NavBar = (props: Props) => {
                 cursor: 'pointer',
               }}
             >
-              Snap
+              Calculator
             </Heading>
             <Heading
               className={openSans.className}
@@ -66,7 +81,7 @@ const NavBar = (props: Props) => {
               fontWeight="bold"
               color={textColor}
             >
-              Tik1Click
+              Tools
             </Heading>
           </Box>
         </Link>
@@ -77,27 +92,44 @@ const NavBar = (props: Props) => {
               lg: 'flex',
             }}
           >
-            <Link href="/trending" locale={router.locale}>
-              <Text className={openSans.className} fontSize="md" color="red" fontWeight="600">
-                #Trending
-              </Text>
-            </Link>
+            <Menu>
+              <MenuButton as={Button} rightIcon={<MdExpandMore />} variant="ghost" color={textColor}>
+                <Text className={openSans.className} fontSize="sm" fontWeight="600">
+                  Calculators
+                </Text>
+              </MenuButton>
+              <MenuList bg={navBackgroundColor} borderColor="gray.200">
+                {calculatorMenuItems.map((item, index) => (
+                  <Link key={index} href={item.href}>
+                    <MenuItem 
+                      bg={navBackgroundColor}
+                      _hover={{ bg: isDarkMode ? 'gray.600' : 'gray.100' }}
+                      color={textColor}
+                    >
+                      <Text className={openSans.className} fontSize="sm">
+                        {item.title}
+                      </Text>
+                    </MenuItem>
+                  </Link>
+                ))}
+              </MenuList>
+            </Menu>
             <Box w="20px" />
             <Link href="/contact" locale={router.locale}>
               <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-                {trans.home.contact}
+                Contact
               </Text>
             </Link>
             <Box w="20px" />
             <Link href="/terms-of-service" locale={router.locale}>
               <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-                {trans.home.terms}
+                Terms
               </Text>
             </Link>
             <Box w="20px" />
             <Link href="/privacy-policy" locale={router.locale}>
               <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-                {trans.home.privacy}
+                Privacy
               </Text>
             </Link>
           </HStack>
@@ -122,11 +154,6 @@ const NavBar = (props: Props) => {
               </Button>
             </PopoverTrigger>
             <PopoverContent bg={navBackgroundColor} w="100%">
-              {/* <PopoverHeader>
-              <Text fontSize="md" fontWeight="bold" color={textColor}>
-              Languages
-              </Text>
-            </PopoverHeader> */}
               <PopoverBody padding="0px">
                 <List>
                   {LANGUAGES.map((item) => (
@@ -165,38 +192,43 @@ const NavBar = (props: Props) => {
           lg: 'none',
         }}
         pb="12px"
+        flexWrap="wrap"
+        justifyContent="center"
       >
-        <Flex flex={0.3} justifyContent="center">
-          <Link href="/trending" locale={router.locale}>
-            <Text className={openSans.className} fontSize="md" color="red" fontWeight="700">
-              #Trending
+        <Menu>
+          <MenuButton as={Button} rightIcon={<MdExpandMore />} variant="ghost" color={textColor} size="sm">
+            <Text className={openSans.className} fontSize="sm" fontWeight="600">
+              Calculators
             </Text>
-          </Link>
-        </Flex>
+          </MenuButton>
+          <MenuList bg={navBackgroundColor} borderColor="gray.200">
+            {calculatorMenuItems.slice(0, 4).map((item, index) => (
+              <Link key={index} href={item.href}>
+                <MenuItem 
+                  bg={navBackgroundColor}
+                  _hover={{ bg: isDarkMode ? 'gray.600' : 'gray.100' }}
+                  color={textColor}
+                >
+                  <Text className={openSans.className} fontSize="sm">
+                    {item.title}
+                  </Text>
+                </MenuItem>
+              </Link>
+            ))}
+          </MenuList>
+        </Menu>
         <Box w="20px" />
-        <Flex flex={0.3} justifyContent="center">
-          <Link href="/contact" locale={router.locale}>
-            <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-              {trans.home.contact}
-            </Text>
-          </Link>
-        </Flex>
+        <Link href="/contact" locale={router.locale}>
+          <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
+            Contact
+          </Text>
+        </Link>
         <Box w="20px" />
-        <Flex flex={0.3} justifyContent="center">
-          <Link href="/terms-of-service" locale={router.locale}>
-            <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-              {trans.home.terms}
-            </Text>
-          </Link>
-        </Flex>
-        <Box w="20px" />
-        <Flex flex={0.3} justifyContent="center">
-          <Link href="/privacy-policy" locale={router.locale}>
-            <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
-              {trans.home.privacy}
-            </Text>
-          </Link>
-        </Flex>
+        <Link href="/privacy-policy" locale={router.locale}>
+          <Text className={openSans.className} fontSize="sm" color={textColor} fontWeight="600">
+            Privacy
+          </Text>
+        </Link>
       </HStack>
     </VStack>
   );
