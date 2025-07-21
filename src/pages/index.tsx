@@ -1,281 +1,203 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
+  Button,
+  Grid,
+  GridItem,
   Heading,
   HStack,
-  ListItem,
-  OrderedList,
+  Icon,
   Text,
-  UnorderedList,
   VStack,
+  useColorModeValue,
+  Container,
 } from '@chakra-ui/react';
-import useTrans from '../hooks/useTrans';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import Layout from '@/components/Layout';
 import { openSans } from '@/contants';
-import Board from '@/components/Board';
+import Link from 'next/link';
+import { FaCalculator, FaPercent, FaRulerCombined, FaWeight, FaDollarSign, FaClock, FaThermometerHalf, FaGasStation } from 'react-icons/fa';
 
-const features = ['feature1', 'feature2', 'feature3', 'feature4', 'feature5'];
-const steps = ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'];
+const calculatorTools = [
+  {
+    title: 'Basic Calculator',
+    description: 'Perform basic arithmetic operations like addition, subtraction, multiplication, and division.',
+    icon: FaCalculator,
+    href: '/calculators/basic',
+    color: 'blue.500',
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percentage increase/decrease, and percentage of a number.',
+    icon: FaPercent,
+    href: '/calculators/percentage',
+    color: 'green.500',
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between different units of measurement including length, weight, volume, and more.',
+    icon: FaRulerCombined,
+    href: '/calculators/unit-converter',
+    color: 'purple.500',
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and understand your health status.',
+    icon: FaWeight,
+    href: '/calculators/bmi',
+    color: 'orange.500',
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate loan payments, interest rates, and amortization schedules.',
+    icon: FaDollarSign,
+    href: '/calculators/loan',
+    color: 'teal.500',
+  },
+  {
+    title: 'Time Calculator',
+    description: 'Calculate time differences, add/subtract time, and convert time zones.',
+    icon: FaClock,
+    href: '/calculators/time',
+    color: 'red.500',
+  },
+  {
+    title: 'Temperature Converter',
+    description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin.',
+    icon: FaThermometerHalf,
+    href: '/calculators/temperature',
+    color: 'cyan.500',
+  },
+  {
+    title: 'Fuel Calculator',
+    description: 'Calculate fuel consumption, trip costs, and fuel efficiency.',
+    icon: FaGasStation,
+    href: '/calculators/fuel',
+    color: 'yellow.500',
+  },
+];
 
 export default function Home() {
   const { textColor, navBackgroundColor } = useThemeColor();
-  const trans = useTrans();
+  const cardBg = useColorModeValue('white', 'gray.700');
+  const cardHover = useColorModeValue('gray.50', 'gray.600');
 
   return (
-    <Layout>
-      <Board />
-      <VStack bg={navBackgroundColor} w="100%" alignItems="flex-start" px="10%" py="5">
-        <ins
-          className="adsbygoogle"
-          style={{
-            display: 'block',
-          }}
-          data-ad-client="ca-pub-1909271227447970"
-          data-ad-slot="2201551494"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-        <Heading className={openSans.className} color={textColor}>
-          {trans.home.text1}
-        </Heading>
-        <Text
-          className={openSans.className}
-          fontSize="16px"
-          fontWeight="400"
-          color={textColor}
-          lineHeight="7"
-        >
-          {trans.home.text2} <br />
-          {trans.home.text3}
-        </Text>
-        <Box height="16px" />
-        <iframe
-          width="100%"
-          height="700px"
-          src="https://www.youtube.com/embed/tUpTMbl991U"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-        <Box height="16px" />
-        <Heading className={openSans.className} color={textColor}>
-          {trans.home.howToUse.title}
-        </Heading>
-        <Box pl="2%">
-          <OrderedList color={textColor}>
-            {steps.map((step, index) => (
-              <ListItem key={index}>
-                <Text
-                  className={openSans.className}
-                  fontSize="18px"
-                  fontWeight="600"
-                  color={textColor}
-                  lineHeight="9"
-                >
-                  {{ ...(trans.home.howToUse as any) }?.[step as any]}
-                </Text>
-              </ListItem>
+    <Layout title="Calculator Tools - Free Online Calculators">
+      <Container maxW="container.xl" py={8}>
+        <VStack spacing={8} align="stretch">
+          <Box textAlign="center" py={8}>
+            <Heading 
+              size="2xl" 
+              className={openSans.className} 
+              color={textColor}
+              mb={4}
+            >
+              Free Online Calculator Tools
+            </Heading>
+            <Text 
+              fontSize="xl" 
+              className={openSans.className} 
+              color={textColor}
+              maxW="2xl"
+              mx="auto"
+            >
+              Access a comprehensive collection of free online calculators for everyday calculations, 
+              unit conversions, financial planning, and more. No downloads required!
+            </Text>
+          </Box>
+
+          <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={6}>
+            {calculatorTools.map((tool, index) => (
+              <GridItem key={index}>
+                <Link href={tool.href} style={{ textDecoration: 'none' }}>
+                  <Box
+                    bg={cardBg}
+                    p={6}
+                    borderRadius="lg"
+                    border="1px"
+                    borderColor="gray.200"
+                    cursor="pointer"
+                    transition="all 0.2s"
+                    _hover={{
+                      bg: cardHover,
+                      transform: 'translateY(-2px)',
+                      boxShadow: 'lg',
+                    }}
+                    height="100%"
+                  >
+                    <VStack align="start" spacing={4} height="100%">
+                      <HStack>
+                        <Icon as={tool.icon} color={tool.color} boxSize={8} />
+                        <Heading 
+                          size="md" 
+                          className={openSans.className} 
+                          color={textColor}
+                        >
+                          {tool.title}
+                        </Heading>
+                      </HStack>
+                      <Text 
+                        className={openSans.className} 
+                        color={textColor}
+                        fontSize="sm"
+                        flex={1}
+                      >
+                        {tool.description}
+                      </Text>
+                      <Button
+                        colorScheme="blue"
+                        size="sm"
+                        width="full"
+                        className={openSans.className}
+                      >
+                        Use Calculator
+                      </Button>
+                    </VStack>
+                  </Box>
+                </Link>
+              </GridItem>
             ))}
-          </OrderedList>
-        </Box>
-        <Box height="16px" />
-        <Heading className={openSans.className} color={textColor}>
-          {trans.home.text4}
-        </Heading>
-        <Box pl="2%">
-          <UnorderedList color={textColor}>
-            {features.map((feature, index) => (
-              <ListItem key={index}>
-                <Text
-                  className={openSans.className}
-                  fontSize="16px"
-                  fontWeight="400"
-                  color={textColor}
-                  lineHeight="7"
-                >
-                  {{ ...(trans.home as any) }?.[feature as any]}
-                </Text>
-              </ListItem>
-            ))}
-          </UnorderedList>
-        </Box>
-        <Box w="100%" pt="20px">
-          <Accordion allowMultiple>
-            <AccordionItem>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  <Heading className={openSans.className} color={textColor}>
-                    {trans.questions.q1}
-                  </Heading>
-                </Box>
-                <AccordionIcon color={textColor} />
-              </AccordionButton>
-              <AccordionPanel pb={4}>
-                <OrderedList color={textColor}>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a11}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a12}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a13}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a14}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a16}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a17}
-                    </Text>
-                  </ListItem>
-                </OrderedList>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  <Heading className={openSans.className} color={textColor}>
-                    {trans.questions.q2}
-                  </Heading>
-                </Box>
-                <AccordionIcon color={textColor} />
-              </AccordionButton>
-              <AccordionPanel pb={4}>
-                <OrderedList color={textColor}>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a21}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a22}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a23}
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text
-                      className={openSans.className}
-                      fontSize="18px"
-                      fontWeight="500"
-                      color={textColor}
-                    >
-                      {trans.questions.a24}
-                    </Text>
-                  </ListItem>
-                </OrderedList>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-        </Box>
-      </VStack>
-      <HStack
-        bg={navBackgroundColor}
-        w="100%"
-        display="flex"
-        alignItems="flex-start"
-        px="10%"
-        py="16px"
-        pb="24px"
-      >
-        <Text
-          className={openSans.className}
-          fontSize="16px"
-          fontWeight="700"
-          color={textColor}
-          lineHeight="7"
-        >
-          {trans.home.note}
-        </Text>
-        <Text
-          className={openSans.className}
-          fontSize="16px"
-          fontWeight="400"
-          color={textColor}
-          lineHeight="7"
-        >
-          {trans.home.noteContent}
-        </Text>
-        <ins
-          className="adsbygoogle"
-          style={{
-            display: 'block',
-          }}
-          data-ad-client="ca-pub-1909271227447970"
-          data-ad-slot="1214653326"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      </HStack>
+          </Grid>
+
+          <Box bg={navBackgroundColor} p={8} borderRadius="lg" mt={8}>
+            <VStack spacing={4} textAlign="center">
+              <Heading 
+                size="lg" 
+                className={openSans.className} 
+                color={textColor}
+              >
+                Why Use Our Calculator Tools?
+              </Heading>
+              <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={6} w="full">
+                <VStack>
+                  <Text fontWeight="bold" className={openSans.className} color={textColor}>
+                    🚀 Fast & Accurate
+                  </Text>
+                  <Text fontSize="sm" className={openSans.className} color={textColor}>
+                    Get instant results with precise calculations
+                  </Text>
+                </VStack>
+                <VStack>
+                  <Text fontWeight="bold" className={openSans.className} color={textColor}>
+                    📱 Mobile Friendly
+                  </Text>
+                  <Text fontSize="sm" className={openSans.className} color={textColor}>
+                    Works perfectly on all devices and screen sizes
+                  </Text>
+                </VStack>
+                <VStack>
+                  <Text fontWeight="bold" className={openSans.className} color={textColor}>
+                    🔒 No Registration
+                  </Text>
+                  <Text fontSize="sm" className={openSans.className} color={textColor}>
+                    Use all tools for free without signing up
+                  </Text>
+                </VStack>
+              </Grid>
+            </VStack>
+          </Box>
+        </VStack>
+      </Container>
     </Layout>
   );
 }
