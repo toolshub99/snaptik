@@ -1,0 +1,25 @@
+{
+  "name": "Tax Calculator USA",
+  "displayName": "Tax Calculator USA",
+  "version": "1.0.0",
+  "versionCode": 1,
+  "description": "Calculate USA federal and state taxes for 2024",
+  "orientation": "portrait",
+  "icon": "./src/assets/icon.png",
+  "splash": {
+    "image": "./src/assets/splash.png",
+    "backgroundColor": "#1976d2"
+  },
+  "android": {
+    "package": "com.taxcalculatorusa",
+    "versionCode": 1,
+    "adaptiveIcon": {
+      "foregroundImage": "./src/assets/adaptive-icon.png",
+      "backgroundColor": "#1976d2"
+    }
+  },
+  "ios": {
+    "bundleIdentifier": "com.taxcalculatorusa",
+    "buildNumber": "1"
+  }
+}
